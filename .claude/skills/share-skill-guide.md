@@ -37,7 +37,7 @@
 ```json
 {
   "projects": {
-    "first-cc": "C:/Users/PSTji/Desktop/ClaudeCode/first-cc"
+    "first-cc": "C:/Users/用户名/Desktop/ClaudeCode/first-cc"
   }
 }
 ```
@@ -139,7 +139,7 @@ Claude：当前项目中已存在同名技能【find-skills】。是否覆盖？
 ```
 📊 当前项目可用能力总览
 
-项目：C:/Users/PSTji/Desktop/ClaudeCode/my-app
+项目：C:/Users/用户名/Desktop/ClaudeCode/my-app
 
 ═══ 🧠 Skills（项目级） ═══
   find-skills       — 搜索和发现社区技能
@@ -281,6 +281,75 @@ Claude 展示完毕后会问：
 
 ---
 
+## 能力四：快速缺失发现（推荐日常使用）
+
+### 命令格式
+
+```
+/share_skill --missing-f
+/share_skill -missing-f
+/share_skill missing-f
+```
+
+### 和能力三有什么区别？
+
+功能完全相同，但执行效率大幅提升：
+
+| 对比维度 | `/share_skill missing` | `/share_skill --missing-f` |
+|---------|----------------------|--------------------------|
+| 工具调用次数 | ~11 次 | **~5-6 次** |
+| 文件扫描命中 | 50+（大量噪音） | **~5 个（精确命中）** |
+| Token 消耗 | ~8000-10000 | **~2000-3000（省 ~70%）** |
+| 插件扫描方式 | 递归通配，扫到大量市场目录文件 | 单层通配，排除 marketplaces/cache |
+| 技能描述读取 | 全量读取所有 SKILL.md | 先比目录名，同名跳过不读文件 |
+
+**简单说：结果一样，但快得多、省得多。日常都用这个就行。**
+
+### 原理
+
+少做三件事：
+1. **不读同名技能** — 注册项目的技能如果和全局技能同名，说明已经自动可用，跳过不读
+2. **不扫市场目录** — 插件扫描只命中真正安装的，不碰 marketplace 和 cache
+3. **不分轮** — 所有数据收集在第一轮一次性并行完成，后续全靠内存对比
+
+```
+第一轮（全并行）
+  ├── 读注册表
+  ├── 读全局 settings（插件+MCP）
+  ├── 读项目 settings（插件+MCP）
+  ├── 列全局技能目录名
+  ├── 列项目技能目录名
+  ├── 列全局插件目录名（精准过滤）
+  └── 列注册项目技能目录名
+        ↓
+第二轮（纯内存，零IO）
+  └── 对比 → 只读真正缺失的 → 展示
+```
+
+### 输出示例
+
+```
+🔍 缺失能力
+
+═══ 📦 未启用的插件 ═══
+    ⬜ content-creator  — 内容创作子代理
+```
+
+### 实操
+
+```
+# 快速检查有什么能装的
+你：/share_skill --missing-f
+
+Claude：发现 1 项缺失：content-creator 插件未启用。
+
+你：开启 content-creator
+
+Claude：✅ 已启用。
+```
+
+---
+
 ## 完整工作流演示
 
 ### 场景：新开了一个项目，想快速配齐常用能力
@@ -341,8 +410,8 @@ Claude：找到【wechat-formatter】，是否导入? → 是
 ```json
 {
   "projects": {
-    "first-cc": "C:/Users/PSTji/Desktop/ClaudeCode/first-cc",
-    "my-app": "C:/Users/PSTji/Desktop/my-app",
+    "first-cc": "C:/Users/用户名/Desktop/ClaudeCode/first-cc",
+    "my-app": "C:/Users/用户名/Desktop/my-app",
     "blog-project": "D:/projects/blog"
   }
 }
