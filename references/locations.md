@@ -25,7 +25,7 @@ cmd /c "rmdir <YEAR_SKILLS>/<名称>"
 
 ### 已全局安装无需链接的技能
 
-以下技能已安装在 `~/.claude/skills/`，所有项目自动可用：agent-reach、pandoc、read-arxiv-paper、browser-act、browser-act-skill-forge、skill-creator、find-skills、share-skill、dispatch、sandbox-agent、reflect、karpathy-guidelines、xiaonian-memory、book-to-skill、book-skill-manager。
+以下技能已安装在 `~/.claude/skills/`，所有项目自动可用：agent-reach、pandoc、read-arxiv-paper、browser-act、browser-act-skill-forge、skill-creator、find-skills、share-skill、dispatch、sandbox-agent、reflect、karpathy-guidelines、book-to-skill。
 
 ---
 

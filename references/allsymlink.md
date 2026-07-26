@@ -7,11 +7,11 @@
 
 | 技能名 | 目标路径 | 来源项目 |
 |--------|----------|----------|
-| baoyu-article-illustrator | `~\.agents/skills/baoyu-article-illustrator\` | global |
-| baoyu-cover-image | `~\.agents/skills/baoyu-cover-image\` | global |
-| baoyu-format-markdown | `~\.agents/skills/baoyu-format-markdown\` | global |
-| baoyu-markdown-to-html | `~\.agents/skills/baoyu-markdown-to-html\` | global |
-| baoyu-post-to-wechat | `~\.agents/skills/baoyu-post-to-wechat\` | global |
+| baoyu-article-illustrator | `~/.claude/skills/baoyu-article-illustrator\` | global |
+| baoyu-cover-image | `~/.claude/skills/baoyu-cover-image\` | global |
+| baoyu-format-markdown | `~/.claude/skills/baoyu-format-markdown\` | global |
+| baoyu-markdown-to-html | `~/.claude/skills/baoyu-markdown-to-html\` | global |
+| baoyu-post-to-wechat | `~/.claude/skills/baoyu-post-to-wechat\` | global |
 | book-to-cards | `SKILL_LIBRARY/skills/book-to-cards\` | skill库-skills |
 | book-to-skill | `~/.claude/skills/book-to-skill\` | global |
 | daily-planner | `SKILL_LIBRARY/.claude/skills/daily-planner\` | skill库-.claude |
@@ -42,7 +42,7 @@
 
 以下技能安装在 `~/.claude/skills/`，所有项目自动可用：
 
-agent-reach · book-to-skill · browser-act · browser-act-skill-forge · dispatch · find-skills · karpathy-guidelines · pandoc · read-arxiv-paper · reflect · sandbox-agent · share-skill · skill-creator · xiaonian-memory
+agent-reach · book-to-skill · browser-act · browser-act-skill-forge · dispatch · find-skills · karpathy-guidelines · pandoc · read-arxiv-paper · reflect · sandbox-agent · share-skill · skill-creator
 
 ## 更新方法
 
